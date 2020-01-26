@@ -71,6 +71,18 @@ class Noeud{
         
         return(noeudG+this.valeur+noeudD);
     }
+
+    trouverNoeud(valeur){
+    
+        if (this.valeur<valeur) {
+                this.droite.trouverNoeud(valeur);
+          }else if (this.valeur>valeur) {
+                this.gauche.trouverNoeud(valeur);
+          }else{
+              console.log("Noeud "+this.valeur+ " trouvé");
+          }
+       
+    }
 }
 
 class Arbre{
@@ -93,11 +105,11 @@ if (this.racine===undefined) {
 
 // la méthode pour trouver une valeur donnée dans un arbre binaire de recherche
 trouverNoeud(valeur){
-if (this.racine===undefined) {
-    
-} else {
-    
-}
+    if (this.racine===undefined) {
+        return "Arbre vide !";
+    } else {
+        return this.racine.trouverNoeud(valeur);
+    }
 };
 //la méthode pour afficher l’arbre selon un parcours infixe
 /**
@@ -129,5 +141,6 @@ arb.ajouterNoeuds(5);
 arb.ajouterNoeuds(60);
 arb.ajouterNoeuds(17);
 arb.ajouterNoeuds(88);
-let arbre=arb.afficherArbre();
+//let arbre=arb.afficherArbre();
+let arbre=arb.trouverNoeud(17);
 console.log(arbre);
