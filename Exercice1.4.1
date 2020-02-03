@@ -1,0 +1,40 @@
+
+function decToHex(nbr){
+  hexa=nbr.toString(16);
+  if (hexa.length % 2 == 1) {
+     hexa = '0' + hexa;
+   }
+   hexa = '0x ' + hexa;
+   return hexa;
+}
+
+
+var littleEndian = (function() {
+  var buffer = new ArrayBuffer(2);
+  new DataView(buffer).setInt16(0, 256, true /*littleEndian donc */);
+  // Int16Array utilise le boutisme de la plate-forme
+  return new Int16Array(buffer)[0] === 256;
+})();
+
+function endians(hex) {
+  if (littleEndian) {
+    return 'Ceci est un nombre en little Endian : 0x '+hex
+  } else {
+    return 'Ceci est un nombre en big Endian : 0x '+ swapEndian(hex)
+  }
+}
+
+
+function swapEndian(hexa){
+  let result ;
+  let len = hexa.match(/../g);
+//  console.log(len);
+  len.reverse();
+ result=len.join('');
+ return result;
+}
+
+
+console.log(decToHex(15))
+console.log(swapEndian('911d07'))
+console.log(endians('911d07'))
